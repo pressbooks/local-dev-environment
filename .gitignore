@@ -1,0 +1,14 @@
+.env
+/log/nginx-stable
+/log/php-fpm-*
+.idea/
+.editorconfig
+vendor/
+web/app/plugins/*
+web/app/mu-plugins/*
+web/app/themes/*
+web/app/uploads/*
+web/wp/
+web/app/object-cache.php
+web/app/debug.log
+web/app/error.log

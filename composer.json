@@ -1,0 +1,88 @@
+{
+    "name": "pressbooks/setup-development-environment",
+    "authors": [
+        {
+            "name": "Oscar Arzola",
+            "email": "oscar@pressbooks.com"
+        },
+        {
+            "name": "Ricardo Arag\u00f3n",
+            "email": "ricardo@pressbooks.com"
+        },
+        {
+            "name": "Steel Wagstaff",
+            "email": "steel@pressbooks.com"
+        },
+        {
+            "name": "Ho Man Chan",
+            "email": "homan@pressbooks.com"
+        }
+    ],
+    "config": {
+        "process-timeout": 0,
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "pressbooks/*": "source",
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "mnsami/composer-custom-directory-installer": true,
+            "roots/wordpress-core-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pressbooks/bedrock"
+        }
+    ],
+    "require": {
+        "pressbooks/bedrock": "dev-dev",
+        "wp-cli/wp-cli-bundle": "^v2.7.0"
+    },
+    "require-dev": {
+        "codeception/module-asserts": "^1.0.0",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "lucatume/wp-browser": "^3.1",
+        "phpunit/phpunit": "^9.5",
+        "pressbooks/coding-standards": "^1.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "web/app/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "web/app/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/app/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        },
+        "wordpress-install-dir": "web/wp"
+    },
+    "scripts": {
+        "lint": [
+            "vendor/bin/phpcs"
+        ],
+        "test": [
+            "vendor/bin/phpunit --configuration web/app/plugins/pressbooks/phpunit.xml"
+        ],
+        "group_test": [
+            "vendor/bin/phpunit --configuration web/app/plugins/pressbooks/phpunit.xml --group"
+        ],
+        "filter_test": [
+            "vendor/bin/phpunit --configuration web/app/plugins/pressbooks/phpunit.xml --filter"
+        ]
+    }
+}

@@ -1,0 +1,84 @@
+name: pressbooksdemo
+recipe: wordpress
+config:
+  webroot: web
+  via: nginx
+  xdebug: true
+  config:
+    php: config_services/php.ini
+    database: config_services/my.cnf
+    vhosts: config_services/nginx.conf
+proxy:
+  appserver_nginx:
+    - pressbooks.test
+env_file:
+  - config_services/.env
+services:
+  database:
+    type: mariadb:10.5
+    portforward: 32777
+  redis:
+    type: redis:5.0
+    portforward: 6379
+  node:
+    type: node
+  appserver:
+    type: php:8.1
+    xdebug: true
+    environment:
+      PHP_IDE_CONFIG: "serverName=appserver"
+      XDEBUG_SESSION_START: lando
+    build_as_root:
+      - scripts/pressbooks_required_libraries.sh
+    run:
+      - cp /user/.ssh/config ~/.ssh
+  mailhog:
+    hogfrom:
+      - appserver
+    type: mailhog
+    portforward: 8025
+  chromedriver:
+    type: compose
+    services:
+      image: ghcr.io/giggio/node-chromedriver/run-on-arch-giggio-node-chromedriver-build-app-aarch64-ubuntu20-04:latest
+      expose:
+        - "4444"
+      environment:
+        CHROMEDRIVER_WHITELISTED_IPS: ""
+        CHROMEDRIVER_URL_BASE: "/wd/hub"
+      security_opt:
+        - seccomp:unconfined
+      command: ["chromedriver",  "--log-path=/tmp/chromedriver.log", "--verbose", "--allowed-ips=", "--allowed-origins=*"]
+      platform: linux/arm64
+      ports:
+        - '8080'
+        - '9515'
+tooling:
+  npm:
+    service: node
+  node:
+    service: node
+  install-tests:
+    description: Install test requirements
+    cmd:
+      - appserver: scripts/prepare_tests_environment.sh
+  test:
+    description: Run all Unit Tests
+    cmd:
+      - appserver: composer run test
+  install-acceptance-tests:
+    description: Install acceptance test requirements
+    cmd:
+      - appserver: scripts/prepare_acceptance_tests_environment.sh
+  testbygroup:
+    description: Run tests within a group
+    cmd:
+      - appserver: composer run group_test
+  testbyfilter:
+    description: Run tests by filter
+    cmd:
+      - appserver: composer run filter_test
+  composer-login:
+    description: Set Tokens to download private repos
+    cmd:
+      - appserver: scripts/composer.sh
