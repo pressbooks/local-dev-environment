@@ -52,12 +52,18 @@ NONCE_SALT='generateme'
    lando composer-login
    lando composer install
    ```
+   At present, you'll also need to run composer install from the pressbooks-network-catalog folder inside your Lando container. To do so, run:
+    ```bash
+   lando ssh
+   cd web/app/plugins/pressbooks-network-catalog
+   composer install
+   exit
+   ```
 9. Install Pressbooks testing utilities (required only on fresh installs)
     ```bash
    lando install-tests
    ```
-10. (optional) Install PB MathJax following the instructions provided here: https://github.com/pressbooks/pb-mathjax?tab=readme-ov-file#installation
-
+   
 ### Web access
 Once you have completed these steps, you should be able to use Pressbooks locally by visiting `https://pressbooks.test`.
 
@@ -91,6 +97,7 @@ and add the following connection data:
 
 ### Notes
 - The sample database includes a single empty public book and a single super admin user with a username / password of `admin / admin`.
+- The `.env.example` file provides some additional environment variables which can be used with your local Pressbooks installation but are commented out by default. If you wish to install the optional PB MathJax service, you can do so following the instructions here: https://github.com/pressbooks/pb-mathjax?tab=readme-ov-file#installation. Once you've launched the service, you can uncomment the relevant line in your local `.env` file. Similar sample `.env` variables are provided for optional DocRaptor, Sentry, Redis, and Algolia integrations.
 - You can install or update dependencies in any repo by navigating to the desired location and running `lando composer install` or `lando composer update`.
 - For SSH access to the appserver you can run: `lando ssh` or `lando ssh -u root` (if you wish to access the appserver as the root user)
 - You can shut down the container running: `lando stop` in the main folder.
