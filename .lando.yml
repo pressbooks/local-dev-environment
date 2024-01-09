@@ -1,4 +1,4 @@
-name: pressbooksdemo
+name: pressbooks-local
 recipe: wordpress
 config:
   webroot: web
@@ -30,30 +30,19 @@ services:
       XDEBUG_SESSION_START: lando
     build_as_root:
       - scripts/pressbooks_required_libraries.sh
-    run:
-      - cp /user/.ssh/config ~/.ssh
+    build:
+      - composer install
+      - cd web/app/plugins/pressbooks-network-catalog && composer install
   mailhog:
     hogfrom:
       - appserver
     type: mailhog
     portforward: 8025
-  chromedriver:
-    type: compose
-    services:
-      image: ghcr.io/giggio/node-chromedriver/run-on-arch-giggio-node-chromedriver-build-app-aarch64-ubuntu20-04:latest
-      expose:
-        - "4444"
-      environment:
-        CHROMEDRIVER_WHITELISTED_IPS: ""
-        CHROMEDRIVER_URL_BASE: "/wd/hub"
-      security_opt:
-        - seccomp:unconfined
-      command: ["chromedriver",  "--log-path=/tmp/chromedriver.log", "--verbose", "--allowed-ips=", "--allowed-origins=*"]
-      platform: linux/arm64
-      ports:
-        - '8080'
-        - '9515'
 tooling:
+  php:
+    service: appserver
+  composer:
+    service: appserver
   npm:
     service: node
   node:
@@ -78,7 +67,3 @@ tooling:
     description: Run tests by filter
     cmd:
       - appserver: composer run filter_test
-  composer-login:
-    description: Set Tokens to download private repos
-    cmd:
-      - appserver: scripts/composer.sh

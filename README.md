@@ -35,7 +35,7 @@ NONCE_SALT='generateme'
    ```bash
    lando start
    ```
-   During this step, you may be asked for an installation folder for Prince:
+   During the build process, you may be asked for an installation folder for Prince:
 	 ```bash
    Install directory
    	This is the directory in which Prince 20220930 will be installed.
@@ -47,25 +47,14 @@ NONCE_SALT='generateme'
     ```bash
    lando db-import pb_local_db.sql
     ```
-8. Install composer dependencies:
-    ```bash
-   lando composer-login
-   lando composer install
-   ```
-   At present, you'll also need to run composer install from the pressbooks-network-catalog folder inside your Lando container. To do so, run:
-    ```bash
-   lando ssh
-   cd web/app/plugins/pressbooks-network-catalog
-   composer install
-   exit
-   ```
-9. Install Pressbooks testing utilities (required only on fresh installs)
-    ```bash
+8. Install Pressbooks testing utilities
+	  ```bash
    lando install-tests
-   ```
-   
+    ```
+9. [Optional] Tell your host machine to trust the default Lando Certificate Authority: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
+
 ### Web access
-Once you have completed these steps, you should be able to use Pressbooks locally by visiting `https://pressbooks.test`.
+Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or 'https://pressbooks.test`.
 
 ### Composer
 You can run Composer commands inside your Lando instance like so: `lando composer install` or `lando composer update`.
@@ -87,19 +76,19 @@ You can configure XDebug locally by adding a new PHP Remote Debug configuration 
 
 ### Add DB Connection in PHPSTORM
 You can set up access to your database in PHPStorm by creating a new MariaDB connection and setting the following values:
-- Check through `lando info` the host and port of your `database` service.
-- In PHPStorm, go to right side menu `Database ` and click on the `+` button to add a new `MariaDB` connection 
-and add the following connection data:
-- host and port checked in database service.
-- user: wordpress
-- password: wordpress
-- database: wordpress
+1. Run `lando info` and note the `host` and `port` values used by your `database` service.
+2. In PHPStorm, open the `Database` menu (on the right side of the IDE), click the `+` button and add a new `MariaDB` connection. 
+3. Enter the following connection data:
+    - The `host` and `port` values obtained by running `lando info` earlier
+    - user: wordpress
+    - password: wordpress
+    - database: wordpress
 
 ### Notes
 - The sample database includes a single empty public book and a single super admin user with a username / password of `admin / admin`.
 - The `.env.example` file provides some additional environment variables which can be used with your local Pressbooks installation but are commented out by default. If you wish to install the optional PB MathJax service, you can do so following the instructions here: https://github.com/pressbooks/pb-mathjax?tab=readme-ov-file#installation. Once you've launched the service, you can uncomment the relevant line in your local `.env` file. Similar sample `.env` variables are provided for optional DocRaptor, Sentry, Redis, and Algolia integrations.
-- You can install or update dependencies in any repo by navigating to the desired location and running `lando composer install` or `lando composer update`.
-- For SSH access to the appserver you can run: `lando ssh` or `lando ssh -u root` (if you wish to access the appserver as the root user)
-- You can shut down the container running: `lando stop` in the main folder.
 - `lando info` provides a list of all the services and their ports.
+- You can install or update dependencies in the container or any repo by navigating to the desired location and running `lando composer install` or `lando composer update`.
+- For SSH access to the appserver you can run: `lando ssh` or `lando ssh -u root` (if you wish to access the appserver as the root user)
+- You can shut down the container by running `lando stop`.
 - Logs can be read with `lando logs`.

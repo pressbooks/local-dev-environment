@@ -143,7 +143,7 @@ Config::define('WP_QUICKLATEX_CACHE_URL', Config::get('WP_CONTENT_URL') . '/uplo
 Config::define('WP_MEMORY_LIMIT', env('WP_MEMORY_LIMIT') ?: '96M'); // Everywhere
 Config::define('WP_MAX_MEMORY_LIMIT', env('WP_MAX_MEMORY_LIMIT') ?: '256M'); // In the admin
 Config::define('WP_REDIS_DISABLE_BANNERS', true);
-Config::define('WP_POST_REVISIONS', 50); //this might conflict with the line above
+Config::define('WP_POST_REVISIONS', 50); // save past 50 revisions
 
 /**
  * Multisite Settings
