@@ -13,7 +13,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    ```bash
    git clone git@github.com:pressbooks/local-dev-environment.git
    ```
-If this is your first time attempting to clone a GitHub repository, you may need to configure your computer to access GitHub via SSH key by following these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent and https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account or following this helpful video tutorial: https://www.youtube.com/watch?v=8X4u9sca3Io.
+   If this is your first time attempting to clone a GitHub repository, you may need to configure your computer to access GitHub via SSH key by following these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent and https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account or following this helpful video tutorial: https://www.youtube.com/watch?v=8X4u9sca3Io.
 
 3. Add `127.0.0.1 pressbooks.test` to your `/etc/hosts` file on its own line.
 4. Copy these two environment files:
@@ -23,16 +23,16 @@ If this is your first time attempting to clone a GitHub repository, you may need
    ```
 5. Fill in the requested `ARCHITECTURE` variable in `config_services/.env` with the chip architecture used by your computer (i.e. `amd64` or `arm64`).
 5. Replace the following values in the `.env` file with values generated at https://roots.io/salts.html
-```shell
-AUTH_KEY='generateme'
-SECURE_AUTH_KEY='generateme'
-LOGGED_IN_KEY='generateme'
-NONCE_KEY='generateme'
-AUTH_SALT='generateme'
-SECURE_AUTH_SALT='generateme'
-LOGGED_IN_SALT='generateme'
-NONCE_SALT='generateme'
-```
+   ```shell
+   AUTH_KEY='generateme'
+   SECURE_AUTH_KEY='generateme'
+   LOGGED_IN_KEY='generateme'
+   NONCE_KEY='generateme'
+   AUTH_SALT='generateme'
+   SECURE_AUTH_SALT='generateme'
+   LOGGED_IN_SALT='generateme'
+   NONCE_SALT='generateme'
+   ```
 6. Start your Docker Services
    ```bash
    lando start
@@ -40,26 +40,23 @@ NONCE_SALT='generateme'
    During the build process, you may be asked for an installation folder for Prince:
 	 ```bash
    Install directory
-   	This is the directory in which Prince 20220930 will be installed.
-   	Press Enter to accept the default directory or enter an alternative.
-   	[/usr]: 
+   This is the directory in which Prince 20220930 will be installed.
+   Press Enter to accept the default directory or enter an alternative.
+   [/usr]: 
 	 ```
- 	 Press Enter to accept the default directory.
+ 	 Press `Enter` to accept the default directory.
 7. Import the prepared sample database included in this repo:
-    ```bash
+   ```bash
    lando db-import pb_local_db.sql
-    ```
+   ```
 8. Install Pressbooks testing utilities
-	  ```bash
+	 ```bash
    lando install-tests
-    ```
-9. [Optional] Tell your host machine to trust the default Lando Certificate Authority: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
+   ```
+9. [Optional] Tell your host machine to trust the default Lando Certificate Authority by following these instructions: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
 
 ### Web access
-Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or 'https://pressbooks.test`.
-
-### Composer
-You can run Composer commands inside your Lando instance like so: `lando composer install` or `lando composer update`.
+Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or `https://pressbooks.test`.
 
 ### Running tests
 You can run tests inside your Lando instance with the following commands:
