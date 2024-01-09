@@ -1,7 +1,7 @@
 # Setup Development Environment
 This repository uses Lando/Docker to provision a local instance of Pressbooks for testing and development by open source contributors using the public `pressbooks/bedrock` repo. It has been tested with GNU/Linux and MacOS.
 
-*NOTE: This repo is intended to help developers quickly provision a Pressbooks instance locally. It is not intended to be deployed to production environments, as it lacks several features that are useful for hosted environments (like a persistent object cache backend).* 
+*NOTE: This repo is intended to help developers quickly provision a Pressbooks instance locally. It should not be deployed to production environments, as it lacks several features that are useful for hosted environments (like a persistent object cache backend).* 
 
 ## Requirements
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -19,10 +19,9 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    cp .env.example .env && 
    cp config_services/.env.example config_services/.env
    ```
-5. Fill in the requested `config_services/.env` variables with your platform (amd64 or arm64).
-5. Complete the following values in the `.env` file
+5. Fill in the requested `ARCHITECTURE` variable in `config_services/.env` with the chip architecture used by your computer (i.e. `amd64` or `arm64`).
+5. Replace the following values in the `.env` file with values generated at https://roots.io/salts.html
 ```shell
-# Generate your keys here: https://roots.io/salts.html
 AUTH_KEY='generateme'
 SECURE_AUTH_KEY='generateme'
 LOGGED_IN_KEY='generateme'
@@ -44,16 +43,10 @@ NONCE_SALT='generateme'
    	[/usr]: 
 	 ```
  	 Press Enter to accept the default directory.
-7. Import a testing database from a prepared .sql file:
+7. Import the prepared sample database included in this repo:
     ```bash
-   lando db-import mysql_file_backup.sql
+   lando db-import pb_local_db.sql
     ```
-   For some DB copies you may need to use the `--binary-mode` flag to import it.
-   In that case, use the following command:
-   ```bash
-   lando ssh
-   mysql -uwordpress -pwordpress -hdatabase --binary-mode wordpress < mysql_file_backup.sql
-   ```
 8. Install composer dependencies:
     ```bash
    lando composer-login
@@ -63,6 +56,7 @@ NONCE_SALT='generateme'
     ```bash
    lando install-tests
    ```
+10. (optional) Install PB MathJax following the instructions provided here: https://github.com/pressbooks/pb-mathjax?tab=readme-ov-file#installation
 
 ### Web access
 Once you have completed these steps, you should be able to use Pressbooks locally by visiting `https://pressbooks.test`.
@@ -77,10 +71,6 @@ You can run tests inside your Lando instance with the following commands:
 `lando testbyfilter <FILTER_NAME>` Run only a specific test, for example: `lando testbyfilter test_pressbooks_cg_design_callback`. Accepts wildcards.
 
 `lando testbygroup <GROUPNAME>` Run only a specific group of tests, for example: `lando testbygroup covergenerator`.
-
-### Displaying PHP 8.1 deprecation notices from third parties
-Currently, PHP deprecation notices are displayed from WP Core, WP-CLI and the H5P plugin. If you want to hide them in `development` environment, remove:
-`DISPLAY_PHP8_1_DEPRECATIONS=true` in your `.env` file. It is turned on by default in the `.env.example` file.
 
 ### XDebug configuration in PHPSTORM
 You can configure XDebug locally by adding a new PHP Remote Debug configuration and setting the following values:
@@ -100,9 +90,9 @@ and add the following connection data:
 - database: wordpress
 
 ### Notes
-- The user / password by default for admin access (wp/wp-admin path) is: `admin / admin`
+- The sample database includes a single empty public book and a single super admin user with a username / password of `admin / admin`.
 - You can install or update dependencies in any repo by navigating to the desired location and running `lando composer install` or `lando composer update`.
-- For SSH access you can run: `lando ssh` or `lando ssh -u root` (if you need to be root user)
+- For SSH access to the appserver you can run: `lando ssh` or `lando ssh -u root` (if you wish to access the appserver as the root user)
 - You can shut down the container running: `lando stop` in the main folder.
 - `lando info` provides a list of all the services and their ports.
 - Logs can be read with `lando logs`.
