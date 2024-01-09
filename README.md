@@ -13,6 +13,8 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    ```bash
    git clone git@github.com:pressbooks/local-dev-environment.git
    ```
+If this is your first time attempting to clone a GitHub repository, you may need to configure your computer to access GitHub via SSH key. See these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent + https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account or this helpful video tutorial: https://youtu.be/8X4u9sca3Io?si=rdL3chT5ZPXEGPyO
+
 3. Add `127.0.0.1 pressbooks.test` to your `/etc/hosts` file on its own line.
 4. Copy these two environment files:
    ```bash
