@@ -22,7 +22,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    cp config_services/.env.example config_services/.env
    ```
 5. Fill in the requested `ARCHITECTURE` variable in `config_services/.env` with the chip architecture used by your computer (i.e. `amd64` or `arm64`).
-5. Replace the following values in the `.env` file with values generated at https://roots.io/salts.html
+6. Replace the following values in the `.env` file with values generated at https://roots.io/salts.html
    ```shell
    AUTH_KEY='generateme'
    SECURE_AUTH_KEY='generateme'
@@ -33,7 +33,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    LOGGED_IN_SALT='generateme'
    NONCE_SALT='generateme'
    ```
-6. Start your Docker Services
+7. Start your Docker Services
    ```bash
    lando start
    ```
@@ -45,15 +45,15 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    [/usr]: 
 	 ```
  	 Press `Enter` to accept the default directory.
-7. Import the prepared sample database included in this repo:
+8. Import the prepared sample database included in this repo:
    ```bash
    lando db-import pb_local_db.sql
    ```
-8. Install Pressbooks testing utilities
+9. Install Pressbooks testing utilities
 	 ```bash
    lando install-tests
    ```
-9. [Optional] Tell your host machine to trust the default Lando Certificate Authority by following these instructions: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
+10. [Optional] Tell your host machine to trust the default Lando Certificate Authority by following these instructions: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
 
 ### Web access
 Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or `https://pressbooks.test`.
