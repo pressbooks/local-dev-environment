@@ -1,5 +1,5 @@
 # Setup Development Environment
-This repository uses Lando/Docker to provision a local instance of Pressbooks for testing and development by open source contributors using the public `pressbooks/bedrock` repo. It has been tested with GNU/Linux and MacOS.
+This repository uses Lando/Docker to provision a local instance of Pressbooks for testing and development by open source contributors. It uses the public `pressbooks/bedrock` repo and has been tested with GNU/Linux and MacOS.
 
 *NOTE: This repo is intended to help developers quickly provision a Pressbooks instance locally. It should not be deployed to production environments, as it lacks several features that are useful for hosted environments (like a persistent object cache backend).* 
 
