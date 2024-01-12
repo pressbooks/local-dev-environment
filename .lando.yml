@@ -32,7 +32,6 @@ services:
       - scripts/pressbooks_required_libraries.sh
     build:
       - composer install
-      - cd web/app/plugins/pressbooks-network-catalog && composer install
   mailhog:
     hogfrom:
       - appserver
