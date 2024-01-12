@@ -15,7 +15,7 @@ env_file:
   - config_services/.env
 services:
   database:
-    type: mariadb:10.5
+    type: mariadb:10.5.23
     portforward: 32777
   redis:
     type: redis:5.0
@@ -37,6 +37,8 @@ services:
     hogfrom:
       - appserver
     type: mailhog
+    overrides:
+      image: anatomicjc/mailhog:1.0.1
     portforward: 8025
 tooling:
   php:
