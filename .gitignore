@@ -1,5 +1,5 @@
 .env
-.composer.lock
+composer.lock
 /log/nginx-stable
 /log/php-fpm-*
 .idea/
