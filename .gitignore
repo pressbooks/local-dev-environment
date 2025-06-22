@@ -1,9 +1,11 @@
 .env
+composer.lock
 /log/nginx-stable
 /log/php-fpm-*
 .idea/
 .editorconfig
 vendor/
+web/app/languages/*
 web/app/plugins/*
 web/app/mu-plugins/*
 web/app/themes/*
