@@ -16,14 +16,14 @@ env_file:
 services:
   database:
     type: mariadb:10.5.23
-    portforward: 32777
+    portforward: true
   redis:
     type: redis:5.0
     portforward: 6379
   node:
     type: node
   appserver:
-    type: php:8.1
+    type: php:8.2
     xdebug: true
     environment:
       PHP_IDE_CONFIG: "serverName=appserver"
