@@ -23,7 +23,7 @@ services:
   node:
     type: node
   appserver:
-    type: php:8.1
+    type: php:8.2
     xdebug: true
     environment:
       PHP_IDE_CONFIG: "serverName=appserver"
