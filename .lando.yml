@@ -72,3 +72,8 @@ tooling:
     description: Run tests by filter
     cmd:
       - appserver: composer run filter_test
+  db-import-custom:
+    description: Import a SQL dump into the database defined in .env
+    cmd: 
+      - appserver: scripts/import_db.sh
+    user: root
