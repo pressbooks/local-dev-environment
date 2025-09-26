@@ -36,18 +36,16 @@ services:
       - scripts/pressbooks_required_libraries.sh
     build:
       - composer install
+    run_as_root: 
+      - bash /app/scripts/import_db.sh /app/pb_local_db.sql
+      - bash /app/scripts/prepare_tests_environment.sh
   mailhog:
     hogfrom:
       - appserver
     type: mailhog
     overrides:
       image: anatomicjc/mailhog:1.0.1
-    portforward: 8026
-events:
-  post-start:
-    - appserver:
-        - bash /app/scripts/import_db.sh /app/pb_local_db.sql
-        - bash /app/scripts/prepare_tests_environment.sh
+    portforward: 8026        
 tooling:
   php:
     service: appserver
@@ -78,5 +76,6 @@ tooling:
       - appserver: composer run filter_test
   db-import-custom:
     description: Import a SQL dump into the database defined in .env
-    cmd: scripts/import_db.sh
+    cmd: 
+      - appserver: scripts/import_db.sh
     user: root

@@ -51,6 +51,8 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
 Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or `https://pressbooks.test`.
 
 ### Running tests
+Everything needed to run unit tests will be provided when you run `lando start`. You can re-install the Pressbooks test suite by running `lando install-tests`. 
+
 You can run tests inside your Lando instance with the following commands:
 `lando test` (this is a shortcut which runs the core Pressbooks unit tests inside your container)
 
@@ -78,6 +80,7 @@ You can set up access to your database in your IDE by creating a new MariaDB con
 ### Notes
 - The sample database includes a single empty public book and a single super admin user with a username / password of `admin / admin`.
 - The `.env.example` file provides some additional environment variables which can be used with your local Pressbooks installation but are commented out by default. If you wish to install the optional PB MathJax service, you can do so following the instructions here: https://github.com/pressbooks/pb-mathjax?tab=readme-ov-file#installation. Once you've launched the service, you can uncomment the relevant line in your local `.env` file. Similar sample `.env` variables are provided for optional DocRaptor, Sentry, Redis, and Algolia integrations.
+- You can force a reimport of the sample DB by running `lando db-import-custom pb_local_db.sql --force`
 - `lando info` provides a list of all the services and their ports.
 - You can install or update dependencies in the container or any repo by navigating to the desired location and running `lando composer install` or `lando composer update`.
 - For SSH access to the appserver you can run: `lando ssh` or `lando ssh -u root` (if you wish to access the appserver as the root user)
