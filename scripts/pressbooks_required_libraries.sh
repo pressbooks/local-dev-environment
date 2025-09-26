@@ -23,7 +23,7 @@ if [ "$ARCHITECTURE" ]; then
     tar -xvzf prince-20221028-linux-generic-aarch64.tar.gz
     rm prince-20221028-linux-generic-aarch64.tar.gz
     cd prince-20221028-linux-generic-aarch64
-    ./install.sh /usr
+    echo "" | ./install.sh /usr # install to /usr automatically
     cd ..
     rm -rf prince-20221028-linux-generic-aarch64
 	fi
@@ -43,11 +43,10 @@ docker-php-ext-enable xsl
 wget https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-9-1-7J.zip
 mv SaxonHE9-9-1-7J.zip /usr/share/java
 cd /usr/share/java
-unzip SaxonHE9-9-1-7J.zip
+unzip -o SaxonHE9-9-1-7J.zip # unzip with overwrite
 rm SaxonHE9-9-1-7J.zip
 
 cp /app/files/saxon9he-xquery /usr/bin/saxon9he-xquery
 cp /app/files/saxon9he-xslt /usr/bin/saxon9he-xslt
 chmod 755 /usr/bin/saxon9he-xquery
 chmod 755 /usr/bin/saxon9he-xslt
-
