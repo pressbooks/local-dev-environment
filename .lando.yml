@@ -17,6 +17,10 @@ services:
   database:
     type: mariadb:10.5.23
     portforward: 32778
+    creds:
+      user: pressbooks_oss_user
+      password: secretpassword
+      database: pressbooks_oss
   redis:
     type: redis:5.0
     portforward: 6380
