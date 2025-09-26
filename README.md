@@ -1,5 +1,5 @@
 # Setup Development Environment
-This repository uses Lando/Docker to provision a local instance of Pressbooks for testing and development by open source contributors. It uses the public `pressbooks/bedrock` repo and has been tested with GNU/Linux and MacOS.
+This repository uses Lando/Docker to provision a local instance of Pressbooks for testing and development by open source contributors. It has been tested with GNU/Linux, MacOS, and Windows.
 
 *NOTE: This repo is intended to help developers quickly provision a Pressbooks instance locally. It should not be deployed to production environments, as it lacks several features that are useful for hosted environments (like a persistent object cache backend).* 
 
@@ -66,15 +66,15 @@ You can run tests inside your Lando instance with the following commands:
 
 `lando testbygroup <GROUPNAME>` Run only a specific group of tests, for example: `lando testbygroup covergenerator`.
 
-### XDebug configuration in PHPSTORM
+### XDebug configuration
 You can configure XDebug locally by adding a new PHP Remote Debug configuration and setting the following values:
 - Name: appserver
 - Host: pressbooks.test
 - Port: 443
 - Use path mappings: <YOUR PATH>/app/web -> /app/web
 
-### Add DB Connection in PHPSTORM
-You can set up access to your database in PHPStorm by creating a new MariaDB connection and setting the following values:
+### Add DB Connection
+You can set up access to your database in your IDE by creating a new MariaDB connection and setting the following values:
 1. Run `lando info` and note the `host` and `port` values used by your `database` service.
 2. In PHPStorm, open the `Database` menu (on the right side of the IDE), click the `+` button and add a new `MariaDB` connection. 
 3. Enter the following connection data:

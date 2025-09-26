@@ -1,4 +1,4 @@
-name: pressbooks-local
+name: oss-pb-local
 recipe: wordpress
 config:
   webroot: web
@@ -16,10 +16,10 @@ env_file:
 services:
   database:
     type: mariadb:10.5.23
-    portforward: 32777
+    portforward: 32778
   redis:
     type: redis:5.0
-    portforward: 6379
+    portforward: 6380
   node:
     type: node
   appserver:
@@ -38,7 +38,7 @@ services:
     type: mailhog
     overrides:
       image: anatomicjc/mailhog:1.0.1
-    portforward: 8025
+    portforward: 8026
 tooling:
   php:
     service: appserver
