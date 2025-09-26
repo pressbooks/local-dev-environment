@@ -34,8 +34,6 @@ services:
       XDEBUG_SESSION_START: lando
     build_as_root:
       - scripts/pressbooks_required_libraries.sh
-      - bash /app/scripts/import_db.sh /app/pb_local_db.sql
-      - bash /app/scripts/prepare_tests_environment.sh
     build:
       - composer install
   mailhog:
@@ -45,6 +43,11 @@ services:
     overrides:
       image: anatomicjc/mailhog:1.0.1
     portforward: 8026
+events:
+  post-start:
+    - appserver:
+        - bash /app/scripts/import_db.sh /app/pb_local_db.sql
+        - bash /app/scripts/prepare_tests_environment.sh
 tooling:
   php:
     service: appserver
@@ -56,8 +59,7 @@ tooling:
     service: node
   install-tests:
     description: Install test requirements
-    cmd:
-      - appserver: scripts/prepare_tests_environment.sh
+    cmd: scripts/prepare_tests_environment.sh
   test:
     description: Run all Unit Tests
     cmd:
@@ -76,6 +78,5 @@ tooling:
       - appserver: composer run filter_test
   db-import-custom:
     description: Import a SQL dump into the database defined in .env
-    cmd: 
-      - appserver: scripts/import_db.sh
+    cmd: scripts/import_db.sh
     user: root
