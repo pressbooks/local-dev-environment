@@ -32,7 +32,7 @@ else
 fi
 
 # Install latest version of Node
-curl -sL "https://deb.nodesource.com/setup_18.x" | bash - \
+curl -sL "https://deb.nodesource.com/setup_22.x" | bash - \
   && apt-get install -y nodejs
 
 # install missing xsl extension
