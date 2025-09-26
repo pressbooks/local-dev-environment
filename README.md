@@ -47,7 +47,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
  	 Press `Enter` to accept the default directory.
 8. Import the prepared sample database included in this repo:
    ```bash
-   lando db-import pb_local_db.sql
+   lando db-import-custom pb_local_db.sql
    ```
 9. Install Pressbooks testing utilities
 	 ```bash
