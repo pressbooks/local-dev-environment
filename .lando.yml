@@ -57,7 +57,8 @@ tooling:
     service: node
   install-tests:
     description: Install test requirements
-    cmd: scripts/prepare_tests_environment.sh
+    cmd: 
+      - appserver: scripts/prepare_test_environment.sh
   test:
     description: Run all Unit Tests
     cmd:
