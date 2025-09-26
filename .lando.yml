@@ -80,5 +80,5 @@ tooling:
       - appserver: scripts/import_db.sh
     user: root
 events:
-  post-rebuild:
+  post-start:
     - database: bash /app/scripts/import_db.sh /app/pb_local_db.sql
