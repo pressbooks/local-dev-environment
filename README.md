@@ -37,7 +37,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    ```bash
    lando start
    ```
-   During the build process, you may be asked for an installation folder for Prince:
+   This will create all the services needed to install a local instance of Pressbooks and import a sample database. During the build process, you may be asked for an installation folder for Prince:
 	 ```bash
    Install directory
    This is the directory in which Prince 20220930 will be installed.
@@ -45,15 +45,7 @@ This repository uses Lando/Docker to provision a local instance of Pressbooks fo
    [/usr]: 
 	 ```
  	 Press `Enter` to accept the default directory.
-8. Import the prepared sample database included in this repo:
-   ```bash
-   lando db-import-custom pb_local_db.sql
-   ```
-9. Install Pressbooks testing utilities
-	 ```bash
-   lando install-tests
-   ```
-10. [Optional] Tell your host machine to trust the default Lando Certificate Authority by following these instructions: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
+8. [Optional] Tell your host machine to trust the default Lando Certificate Authority by following these instructions: https://docs.lando.dev/core/v3/security.html#trusting-the-ca   
 
 ### Web access
 Once you have completed these steps, you should be able to use Pressbooks locally by visiting `http://pressbooks.test` or `https://pressbooks.test`.
@@ -79,9 +71,9 @@ You can set up access to your database in your IDE by creating a new MariaDB con
 2. In PHPStorm, open the `Database` menu (on the right side of the IDE), click the `+` button and add a new `MariaDB` connection. 
 3. Enter the following connection data:
     - The `host` and `port` values obtained by running `lando info` earlier
-    - user: wordpress
-    - password: wordpress
-    - database: wordpress
+    - user: pressbooks_oss_user
+    - password: secretpassword
+    - database: pressbooks_oss
 
 ### Notes
 - The sample database includes a single empty public book and a single super admin user with a username / password of `admin / admin`.

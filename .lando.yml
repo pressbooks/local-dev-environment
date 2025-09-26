@@ -34,6 +34,8 @@ services:
       XDEBUG_SESSION_START: lando
     build_as_root:
       - scripts/pressbooks_required_libraries.sh
+      - bash /app/scripts/import_db.sh /app/pb_local_db.sql
+      - bash /app/scripts/prepare_tests_environment.sh
     build:
       - composer install
   mailhog:
