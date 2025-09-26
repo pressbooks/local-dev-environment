@@ -38,7 +38,7 @@ services:
       - composer install
     run_as_root: 
       - bash /app/scripts/import_db.sh /app/pb_local_db.sql
-      - bash /app/scripts/prepare_tests_environment.sh
+      - bash /app/scripts/prepare_test_environment.sh
   mailhog:
     hogfrom:
       - appserver
