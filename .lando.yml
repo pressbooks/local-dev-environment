@@ -17,6 +17,10 @@ services:
   database:
     type: mariadb:10.5.23
     portforward: 32778
+    creds:
+      user: pressbooks_oss_user
+      password: secretpassword
+      database: pressbooks_oss
   redis:
     type: redis:5.0
     portforward: 6380
@@ -32,6 +36,8 @@ services:
       - scripts/pressbooks_required_libraries.sh
     build:
       - composer install
+    run_as_root:
+      - bash /app/scripts/prepare_test_environment.sh
   mailhog:
     hogfrom:
       - appserver
@@ -51,7 +57,7 @@ tooling:
   install-tests:
     description: Install test requirements
     cmd:
-      - appserver: scripts/prepare_tests_environment.sh
+      - appserver: scripts/prepare_test_environment.sh
   test:
     description: Run all Unit Tests
     cmd:
@@ -68,3 +74,11 @@ tooling:
     description: Run tests by filter
     cmd:
       - appserver: composer run filter_test
+  db-import-custom:
+    description: Import a SQL dump into the database defined in .env
+    cmd:
+      - appserver: scripts/import_db.sh
+    user: root
+events:
+  post-start:
+    - database: bash /app/scripts/import_db.sh /app/pb_local_db.sql
