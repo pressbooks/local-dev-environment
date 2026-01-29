@@ -15,17 +15,17 @@ rm epubcheck-4.2.6.zip
 if [ "$ARCHITECTURE" ]; then
 	if [ "$ARCHITECTURE" == amd64 ]; then
 		aptitude install gdebi --assume-yes
-		wget https://www.princexml.com/download/prince_15-1_debian11_amd64.deb
-		gdebi prince_15-1_debian11_amd64.deb --n
-		rm prince_15-1_debian11_amd64.deb
+		wget https://www.princexml.com/download/prince_16.2-1_debian11_amd64.deb
+		gdebi prince_16.2-1_debian11_amd64.deb --n
+		rm prince_16.2-1_debian11_amd64.deb
 	else
-		wget https://www.princexml.com/download/prince-20221028-linux-generic-aarch64.tar.gz
-    tar -xvzf prince-20221028-linux-generic-aarch64.tar.gz
-    rm prince-20221028-linux-generic-aarch64.tar.gz
-    cd prince-20221028-linux-generic-aarch64
+		wget https://www.princexml.com/download/prince-16.2-linux-generic-aarch64.tar.gz
+    tar -xvzf prince-16.2-linux-generic-aarch64.tar.gz
+    rm prince-16.2-linux-generic-aarch64.tar.gz
+    cd prince-16.2-linux-generic-aarch64
     echo "" | ./install.sh /usr # install to /usr automatically
     cd ..
-    rm -rf prince-20221028-linux-generic-aarch64
+    rm -rf prince-16.2-linux-generic-aarch64
 	fi
 else
   echo "You should configure your architecture in config_services/.env"
