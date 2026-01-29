@@ -15,11 +15,11 @@ rm epubcheck-4.2.6.zip
 if [ "$ARCHITECTURE" ]; then
 	if [ "$ARCHITECTURE" == amd64 ]; then
 		aptitude install gdebi --assume-yes
-		wget https://www.princexml.com/download/prince_15-1_debian11_amd64.deb
-		gdebi prince_15-1_debian11_amd64.deb --n
-		rm prince_15-1_debian11_amd64.deb
+		wget https://www.princexml.com/download/prince_14.4-1_debian11_amd64.deb
+		gdebi prince_14.4-1_debian11_amd64.deb --n
+		rm prince_14.4-1_debian11_amd64.deb
 	else
-		wget https://www.princexml.com/download/prince-20221028-linux-generic-aarch64.tar.gz
+		wget https://www.princexml.com/download/prince-20221028-linux-generic-aarch64.tar.gz # Corresponds to Prince 14.4
     tar -xvzf prince-20221028-linux-generic-aarch64.tar.gz
     rm prince-20221028-linux-generic-aarch64.tar.gz
     cd prince-20221028-linux-generic-aarch64
