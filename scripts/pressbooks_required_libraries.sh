@@ -5,11 +5,11 @@ apt-get -qq update || true
 apt-get install default-jdk libxml2-utils libxslt1-dev libgif7 ghostscript imagemagick poppler-utils unzip subversion aptitude epubcheck -yq
 
 # Install latest version of EPUBCheck
-wget https://github.com/w3c/epubcheck/releases/download/v4.2.6/epubcheck-4.2.6.zip
-rm -rf /opt/epubcheck-4.2.6
-unzip epubcheck-4.2.6.zip -d /opt/
-mv /opt/epubcheck-4.2.6 /opt/epubcheck
-rm epubcheck-4.2.6.zip
+wget https://github.com/w3c/epubcheck/releases/download/v5.3.0/epubcheck-5.3.0.zip
+rm -rf /opt/epubcheck-5.3.0
+unzip epubcheck-5.3.0.zip -d /opt/
+mv /opt/epubcheck-5.3.0 /opt/epubcheck
+rm epubcheck-5.3.0.zip
 
 # Install latest version of PrinceXML
 if [ "$ARCHITECTURE" ]; then
