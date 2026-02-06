@@ -26,7 +26,7 @@ services:
   node:
     type: node
   appserver:
-    type: php:8.2
+    type: php:8.3
     xdebug: true
     environment:
       PHP_IDE_CONFIG: "serverName=appserver"
@@ -69,7 +69,7 @@ tooling:
       - appserver: scripts/import_db.sh
     user: root
 events:
-  pre-start: 
+  pre-start:
     - '[ -f .env ] || cp .env.example .env'
     - '[ -f config_services/.env ] || cp config_services/.env.example config_services/.env'
   post-start:

@@ -55,7 +55,7 @@
         "pressbooks/pressbooks-saml-sso": "dev-dev",
         "roots/bedrock-autoloader": "^1.0",
         "roots/bedrock-disallow-indexing": "^2.0",
-        "roots/wordpress": "^6.8",
+        "roots/wordpress": "^6.9",
         "roots/wp-config": "1.0.0",
         "vlucas/phpdotenv": "^5.6"
     },
